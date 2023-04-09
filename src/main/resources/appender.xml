@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+
+    <!-- 로그 파일이 저장될 경로 -->
+    <property name="LOG_PATH" value="/Users/kakao/Desktop/logs"/>
+
+    <!-- 로그 파일 이름 -->
+    <property name="KAFKA_LOG_FILE_NAME" value="kafka"/>
+
+    <property name="CHATGPT_LOG_FILE_NAME" value="chatgpt"/>
+
+    <!-- 콘솔 출력용 appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- appender 이름을 KAFKA로 지정하고 RollingFileAppender를 사용 -->
+    <appender name="KAFKA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 로그 파일 이름 패턴 -->
+        <file>${LOG_PATH}/${KAFKA_LOG_FILE_NAME}.log</file>
+        <!-- INFO인 로그만 출력하는 필터 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 로그 출력 형식 지정 -->
+        <encoder>
+            <pattern>[%d{ISO8601}] %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 아카이브 로그 파일 이름 패턴 -->
+            <fileNamePattern>${LOG_PATH}/${KAFKA_LOG_FILE_NAME}.%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- 최대 아카이브 로그 파일 갯수 -->
+            <maxHistory>7</maxHistory>
+            <!-- Application 기동 시 기존 아카이브 로그 파일 삭제 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- appender 이름을 CHAGPT로 지정하고 RollingFileAppender를 사용 -->
+    <appender name="CHATGPT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 로그 파일 이름 패턴 -->
+        <file>${LOG_PATH}/${CHATGPT_LOG_FILE_NAME}.log</file>
+        <!-- INFO인 로그만 출력하는 필터 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 로그 출력 형식 지정 -->
+        <encoder>
+            <pattern>[%d{ISO8601}] %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 아카이브 로그 파일 이름 패턴 -->
+            <fileNamePattern>${LOG_PATH}/${CHATGPT_LOG_FILE_NAME}.%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- 최대 아카이브 로그 파일 갯수 -->
+            <maxHistory>7</maxHistory>
+            <!-- Application 기동 시 기존 아카이브 로그 파일 삭제 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 전역로그 파일저장용 appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 로그 파일 이름 패턴 -->
+        <file>${LOG_PATH}/server.log</file>
+        <!-- 로그 출력 형식 지정 -->
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 아카이브 로그 파일 이름 패턴 -->
+            <fileNamePattern>${LOG_PATH}/server.%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- 최대 아카이브 로그 파일 갯수 -->
+            <maxHistory>7</maxHistory>
+            <!-- Application 기동 시 기존 아카이브 로그 파일 삭제 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+</included>

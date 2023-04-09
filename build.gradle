@@ -25,11 +25,13 @@ dependencies {
 	/* kafka */
 	implementation 'org.springframework.kafka:spring-kafka'
 
-	/* slack bot */
+	/* slack */
 	implementation("com.slack.api:bolt:1.28.1")
 	implementation("com.slack.api:bolt-servlet:1.28.1")
 	implementation("com.slack.api:bolt-jetty:1.28.1")
 
+	/* log */
+	implementation 'net.logstash.logback:logstash-logback-encoder:7.3'
 	implementation("org.slf4j:slf4j-simple:1.7.36")
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'

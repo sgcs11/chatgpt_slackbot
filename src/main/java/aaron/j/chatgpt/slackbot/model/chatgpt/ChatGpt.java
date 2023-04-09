@@ -33,7 +33,8 @@ public class ChatGpt {
     }
 
     public ChatGptResponseDto askQuestion(String message) {
-        return this.getResponse(
+        log.info("Question : {}", message);
+        ChatGptResponseDto response = this.getResponse(
                 this.buildHttpEntity(
                         new ChatGptRequestDto(
                                 ChatGptConfig.MODEL,
@@ -44,5 +45,8 @@ public class ChatGpt {
                         )
                 )
         );
+        log.info("Answer : {}", response.getChoices().get(0).getText());
+
+        return response;
     }
 }

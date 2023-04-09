@@ -15,7 +15,6 @@ public class KafkaController {
     @PostMapping
     public String sendMessage(String message) {
         producer.sendMessage(message);
-
         return "success";
     }
 }

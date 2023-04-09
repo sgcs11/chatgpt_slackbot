@@ -19,6 +19,7 @@ public class ChatGptResponseDto implements Serializable {
     private List<Choice> choices;
 
     @Builder
+    @SuppressWarnings("unused")
     public ChatGptResponseDto(String id, String object,
                               LocalDate created, String model,
                               List<Choice> choices) {

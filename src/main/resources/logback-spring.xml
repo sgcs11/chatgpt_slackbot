@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <!-- appender 설정 추가 -->
+    <include resource="appender.xml"/>
+
+    <!-- 전역 로그 설정 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- Kafka 이벤트 로그 설정 -->
+    <logger name="aaron.j.chatgpt.slackbot.service.kafka" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="KAFKA"/>
+    </logger>
+
+    <!-- ChatGpt 이벤트 로그 설정 -->
+    <logger name="aaron.j.chatgpt.slackbot.model.chatgpt" additivity="false" level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CHATGPT"/>
+    </logger>
+
+</configuration>

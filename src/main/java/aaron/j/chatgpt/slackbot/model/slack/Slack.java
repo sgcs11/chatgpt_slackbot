@@ -40,7 +40,7 @@ public class Slack {
 
             methods.chatPostMessage(request);
         } catch (SlackApiException | IOException e) {
-            log.info("Slack Api Error");
+            log.info("Slack Write Error : {}", e.getMessage());
         }
     }
 }

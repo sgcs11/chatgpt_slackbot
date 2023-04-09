@@ -17,6 +17,7 @@ public class Choice implements Serializable {
     private String finishReason;
 
     @Builder
+    @SuppressWarnings("unused")
     public Choice(String text, Integer index, String finishReason) {
         this.text = text;
         this.index = index;

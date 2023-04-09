@@ -1,7 +1,6 @@
 package aaron.j.chatgpt.slackbot.controller.slack;
 
 import aaron.j.chatgpt.slackbot.service.kafka.KafkaProducer;
-import aaron.j.chatgpt.slackbot.service.slack.SlackService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 public class SlackBotController {
-    private final SlackService slackService;
-
     private final KafkaProducer kafkaProducer;
 
     private final ObjectMapper mapper;
@@ -32,7 +29,7 @@ public class SlackBotController {
             kafkaProducer.sendMessage(message);
             return ResponseEntity.ok(jsonNode);
         } catch (Exception e) {
-            log.info("요청 처리 실패");
+            log.info("Request Failed : {}", e.getMessage());
             return ResponseEntity.ok().body(jsonNode); //Slack과의 연동을 위해 StatusCode는 200 성공으로 함
         }
     }
