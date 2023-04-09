@@ -1,0 +1,4 @@
+slack:
+  token: xoxb-5033645632598-5037320053125-dyAmJagK2thLxUhKV9C9GyY1
+  channel:
+    monitor: '#study'
