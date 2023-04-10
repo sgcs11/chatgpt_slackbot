@@ -1,5 +1,6 @@
 package aaron.j.chatgpt.slackbot.service.kafka;
 
+import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,9 @@ public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message) {
-        log.info("Produced message : {}", message);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("produced_message", message);
+        log.info(jsonObject.toString());
         this.kafkaTemplate.send(topicName, message);
     }
 }

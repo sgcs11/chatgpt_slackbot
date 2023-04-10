@@ -3,6 +3,7 @@ package aaron.j.chatgpt.slackbot.model.chatgpt;
 import aaron.j.chatgpt.slackbot.config.chatgpt.ChatGptConfig;
 import aaron.j.chatgpt.slackbot.dto.chatgpt.ChatGptRequestDto;
 import aaron.j.chatgpt.slackbot.dto.chatgpt.ChatGptResponseDto;
+import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,7 +34,10 @@ public class ChatGpt {
     }
 
     public ChatGptResponseDto askQuestion(String message) {
-        log.info("Question : {}", message);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("question", message);
+        log.info(jsonObject.toString());
+
         ChatGptResponseDto response = this.getResponse(
                 this.buildHttpEntity(
                         new ChatGptRequestDto(
@@ -45,7 +49,9 @@ public class ChatGpt {
                         )
                 )
         );
-        log.info("Answer : {}", response.getChoices().get(0).getText());
+        jsonObject = new JsonObject();
+        jsonObject.addProperty("answer", response.getChoices().get(0).getText());
+        log.info(jsonObject.toString());
 
         return response;
     }
