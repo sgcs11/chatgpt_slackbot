@@ -1,4 +1,4 @@
 spring:
   profiles:
-    include: kafka, redis, slack
+    include: kafka, redis, slack, chatgpt
 

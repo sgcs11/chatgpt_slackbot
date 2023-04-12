@@ -1,9 +1,10 @@
 package aaron.j.chatgpt.slackbot.config.chatgpt;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class ChatGptConfig {
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
-    public static final String API_KEY = "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";
     public static final String MODEL = "text-davinci-003";
     public static final Integer MAX_TOKEN = 300;
     public static final Double TEMPERATURE = 0.0;

@@ -5,6 +5,7 @@ import aaron.j.chatgpt.slackbot.dto.chatgpt.ChatGptRequestDto;
 import aaron.j.chatgpt.slackbot.dto.chatgpt.ChatGptResponseDto;
 import com.google.gson.JsonObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,12 +16,14 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @Slf4j
 public class ChatGpt {
+    @Value(value = "${chatgpt.token}")
+    private String token;
     private final RestTemplate restTemplate = new RestTemplate();
 
     private HttpEntity<ChatGptRequestDto> buildHttpEntity(ChatGptRequestDto requestDto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(ChatGptConfig.MEDIA_TYPE));
-        headers.add(ChatGptConfig.AUTHORIZATION, ChatGptConfig.BEARER + ChatGptConfig.API_KEY);
+        headers.add(ChatGptConfig.AUTHORIZATION, ChatGptConfig.BEARER + token);
         return new HttpEntity<>(requestDto, headers);
     }
 

@@ -21,3 +21,18 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+  logstash:
+    image: arm64v8/logstash:8.7.0
+    container_name: logstash
+    ports:
+      - "5044:5044"
+  elasticsearch:
+    image: arm64v8/elasticsearch:8.7.0
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+  kibana:
+    image: arm64v8/kibana:8.7.0
+    container_name: kibana
+    ports:
+      - "5601:5601"
